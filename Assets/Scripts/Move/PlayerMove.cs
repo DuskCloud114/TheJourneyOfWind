@@ -154,10 +154,10 @@ public class PlayerMove : MonoBehaviour
         {
             if (isGrounded || (Time.time - lastGroundedTime) < coyoteTime)
             {
+                lastGroundedTime = -999f;
+
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
                 jumpCount--;
-
-                lastGroundedTime = -999f;
             }
         }
         if (context.canceled)
