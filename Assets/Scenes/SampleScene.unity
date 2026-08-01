@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 1194220502}
   - component: {fileID: 1194220501}
   - component: {fileID: 1194220500}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,6 +419,10 @@ PrefabInstance:
     - target: {fileID: 2873080097100292008, guid: 2777ffa293ec0ed44b3d7bcde85c778f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900314961682801730, guid: 2777ffa293ec0ed44b3d7bcde85c778f, type: 3}
+      propertyPath: m_Name
+      value: groundCheck
       objectReference: {fileID: 0}
     - target: {fileID: 6480503351794402457, guid: 2777ffa293ec0ed44b3d7bcde85c778f, type: 3}
       propertyPath: m_Name
