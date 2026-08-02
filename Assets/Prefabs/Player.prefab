@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2665017256373656708}
   - component: {fileID: 9192286853413745440}
   - component: {fileID: 9176105989834454164}
+  - component: {fileID: 3662150735491638827}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -204,8 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runState: 1
-  rb: {fileID: 0}
-  runSpeed: 20
+  runSpeed: 30
   runUpTime: 0.1
   jumpSpeed: 12
   fastJumpSpeed: 5
@@ -215,7 +215,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   groundCheck: {fileID: 0}
-  checkDistance: 1
+  checkDistance: 0.7
   lastGroundedTime: -1
   coyoteTime: 0.1
   isGrounded: 0
+--- !u!114 &3662150735491638827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480503351794402457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7d272305cc6334fa1237f416b4ae95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashSpeed: 15
+  isDashing: 0
+  dashTime: 0.3
+  maxDashCount: 1
+  dashCount: 1

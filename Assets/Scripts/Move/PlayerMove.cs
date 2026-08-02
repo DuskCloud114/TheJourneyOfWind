@@ -14,7 +14,12 @@ public class PlayerMove : MonoBehaviour
 {
     MoveInputAction moveInputAction;
     [SerializeField] private RunState runState = RunState.stay;
-    public Rigidbody2D rb;
+
+    [Header("其他组件引用")]
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private float maxGravityScale;
+    private PlayerDash playerDash;
 
     [Header("水平移动数据")]
     [SerializeField] private float runSpeed = -1;
@@ -35,14 +40,19 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float lastGroundedTime = -1;
     [SerializeField] private float coyoteTime = -1;
     [SerializeField] private bool isGrounded;
+    public bool IsGrounded { get { return isGrounded; } set { } }
+
     void Awake()
     {
         moveInputAction = new MoveInputAction();
+        playerDash = this.gameObject.GetComponent<PlayerDash>();
+        spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     void OnEnable()
     {
         moveInputAction.Enable();
+
         moveInputAction.Normal.Run.performed += ChangeRunState;
         moveInputAction.Normal.Run.canceled += ChangeRunState;
 
@@ -57,13 +67,19 @@ public class PlayerMove : MonoBehaviour
 
         moveInputAction.Normal.Jump.performed -= JumpUpdate;
         moveInputAction.Normal.Jump.canceled -= JumpUpdate;
+
         moveInputAction.Disable();
     }
 
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
-        if (rb == null) Debug.LogError("玩家预制体缺少 Rigidbody2D，请检查玩家身上是否挂载了 Rigidbody2D 组件");
+        if (rb == null) Debug.LogError("玩家预制体缺少 Rigidbody2D 组件，请检查玩家身上是否挂载了 Rigidbody2D 组件");
+        if (rb != null) maxGravityScale = rb.gravityScale;
+
+        if (playerDash == null) Debug.LogError("玩家预制体缺少 PlayerDash 组件，请检查玩家身上是否挂载了 PlayerDash 组件");
+
+        if (spriteRenderer == null) Debug.LogError("玩家预制体缺少 SpriteRenderer 组件，请检查玩家身上是否挂载了 SpriteRenderer 组件");
 
         if (runSpeed <= 0) Debug.LogError("玩家预制体的 runSpeed 速度有误，请检查 inspector");
         if (runUpTime < 0) Debug.LogError("玩家预制体的 runUpTime 时间有误，请检查 inspector");
@@ -85,6 +101,15 @@ public class PlayerMove : MonoBehaviour
     {
         CheckGrounded();
 
+        if (playerDash != null && playerDash.IsDashing)
+        {
+            rb.gravityScale = 0;
+            return;
+        }
+        else rb.gravityScale = maxGravityScale;
+
+        if (playerDash != null && isGrounded) playerDash.ResetDashCount();
+
         switch (runState)
         {
             case RunState.left:
@@ -103,11 +128,19 @@ public class PlayerMove : MonoBehaviour
     {
         if (context.ReadValue<float>() < 0)
         {
-            if (runState != RunState.right) runState = RunState.left;
+            if (runState != RunState.right)
+            {
+                runState = RunState.left; 
+                spriteRenderer.flipX = true;
+            } 
         }
         else if (context.ReadValue<float>() > 0)
         {
-            if (runState != RunState.left) runState = RunState.right;
+            if (runState != RunState.left) 
+            {
+                runState = RunState.right;
+                spriteRenderer.flipX = false;
+            }
         }
         else
         {
