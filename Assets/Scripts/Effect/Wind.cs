@@ -7,7 +7,11 @@ enum WindDirection
     up,
     down,
     left,
-    right
+    right,
+    upperLeft,
+    upperRight,
+    leftLower,
+    lowerRight
 }
 
 enum WindDuration
@@ -69,6 +73,14 @@ public class Wind : MonoBehaviour
                 return Vector2.left;
             case WindDirection.right:
                 return Vector2.right;
+            case WindDirection.upperLeft:
+                return new Vector2(-1, 1).normalized;
+            case WindDirection.upperRight:
+                return new Vector2(1, 1).normalized;
+            case WindDirection.leftLower:
+                return new Vector2(-1, -1).normalized;
+            case WindDirection.lowerRight:
+                return new Vector2(1, -1).normalized;
             default:
                 return Vector2.zero;
         }
