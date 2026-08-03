@@ -10,6 +10,8 @@ enum RunState
     right
 }
 
+// TODO: 解决玩家和场景的摩擦问题
+
 public class PlayerMove : MonoBehaviour
 {
     MoveInputAction moveInputAction;
