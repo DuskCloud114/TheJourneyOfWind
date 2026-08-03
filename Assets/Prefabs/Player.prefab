@@ -62,7 +62,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.54583997, y: 1.064913, z: 1}
+  m_LocalScale: {x: 0.41729465, y: 0.50796354, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4915901551590686968}
@@ -205,9 +205,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runState: 1
-  runSpeed: 30
+  runSpeed: 5
   runUpTime: 0.1
-  jumpSpeed: 12
+  jumpSpeed: 10
   fastJumpSpeed: 5
   maxJumpTime: 2
   jumpCount: 1
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7d272305cc6334fa1237f416b4ae95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 15
+  dashSpeed: 12
   isDashing: 0
   dashTime: 0.3
   maxDashCount: 1

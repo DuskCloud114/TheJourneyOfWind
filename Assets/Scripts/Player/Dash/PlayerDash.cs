@@ -81,6 +81,8 @@ public class PlayerDash : MonoBehaviour
         if (dashDirection == Vector2.zero)
         {
             dashDirection = new Vector2(spriteRenderer.flipX ? -1 : 1, 0);
+            if (dashDirection.x < 0) spriteRenderer.flipX = true;
+            else if (dashDirection.x > 0) spriteRenderer.flipX = false;
         }
     }
 

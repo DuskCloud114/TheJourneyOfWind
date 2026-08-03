@@ -24,7 +24,6 @@ public class PlayerMove : MonoBehaviour
     [Header("水平移动数据")]
     [SerializeField] private float runSpeed = -1;
     [SerializeField] private float runUpTime = -1;
-    private float runUpTimer;
 
     [Header("跳跃数据")]
     [SerializeField] private float jumpSpeed = -1;
@@ -113,13 +112,13 @@ public class PlayerMove : MonoBehaviour
         switch (runState)
         {
             case RunState.left:
-                SpeedUpdate(-1, true);
+                SpeedUpdate(-1);
                 break;
             case RunState.right:
-                SpeedUpdate(1, true);
+                SpeedUpdate(1);
                 break;
             case RunState.stay:
-                SpeedUpdate(0, false);
+                SpeedUpdate(0);
                 break;
         }
     }
@@ -148,21 +147,19 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void SpeedUpdate(int direction, bool isAdd)
+    void SpeedUpdate(int direction)
     {
-        runUpTimer = 0;
-        if (isAdd)
+        float targetSpeed = direction * runSpeed;
+
+        if (runUpTime <= 0)
         {
-            if (runUpTimer < runUpTime) runUpTimer += Time.fixedDeltaTime;
-            else runUpTimer = runUpTime;
-            rb.velocity = new Vector2(direction * runSpeed * Mathf.Clamp01(runUpTimer / runUpTime), rb.velocity.y);
+            rb.velocity = new Vector2(targetSpeed, rb.velocity.y);
+            return;
         }
-        else
-        {
-            if (runUpTimer < runUpTime) runUpTimer += Time.fixedDeltaTime;
-            else runUpTimer = runUpTime;
-            rb.velocity = new Vector2(rb.velocity.x * (1 - Mathf.Clamp01(runUpTimer / runUpTime)), rb.velocity.y);
-        }
+
+        float acceleration = runSpeed / runUpTime;
+        float newSpeed = Mathf.MoveTowards(rb.velocity.x, targetSpeed, acceleration * Time.fixedDeltaTime);
+        rb.velocity = new Vector2(newSpeed, rb.velocity.y);
     }
 
     void CheckGrounded()
