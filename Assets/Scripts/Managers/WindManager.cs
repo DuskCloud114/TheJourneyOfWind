@@ -48,7 +48,7 @@ public class WindManager : MonoBehaviour
 
         if (playerMove != null)
         {
-            playerMove.SetSpeedAccumulation(new Vector2(horVelocity, verVelocity));
+            playerMove.SetVelocityAccumulation(new Vector2(horVelocity, verVelocity));
             playerMove.SetImpulseAccumulation(new Vector2(horImpulse, verImpulse));
         }
     }

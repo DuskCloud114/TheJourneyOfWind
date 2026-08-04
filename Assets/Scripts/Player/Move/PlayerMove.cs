@@ -43,6 +43,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private bool isGrounded;
     public bool IsGrounded { get { return isGrounded; } set { } }
 
+    [Header("风场作用")]
+    [SerializeField] private Vector2 velocityAccumulation = Vector2.zero;
+    [SerializeField] private Vector2 impulseAccumulation = Vector2.zero;
+
     void Awake()
     {
         moveInputAction = new MoveInputAction();
@@ -123,6 +127,15 @@ public class PlayerMove : MonoBehaviour
                 SpeedUpdate(0);
                 break;
         }
+    }
+
+    public void SetVelocityAccumulation(Vector2 velocity)
+    {
+        velocityAccumulation = velocity;
+    }
+    public void SetImpulseAccumulation(Vector2 impulse)
+    {
+        impulseAccumulation = impulse;
     }
 
     void ChangeRunState(InputAction.CallbackContext context)
