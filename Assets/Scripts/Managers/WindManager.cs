@@ -8,7 +8,6 @@ public class WindManager : MonoBehaviour
     private GameObject player;
     private PlayerMove playerMove;
 
-    [SerializeField] private bool isPlayerInWind = false;
     [SerializeField] private float horVelocity = 0;
     [SerializeField] private float verVelocity = 0;
     [SerializeField] private float horImpulse = 0;
@@ -36,27 +35,13 @@ public class WindManager : MonoBehaviour
         else playerMove = player.GetComponent<PlayerMove>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (!isPlayerInWind)
-        {
-            horVelocity = 0;
-            verVelocity = 0;
-            horImpulse = 0;
-            verImpulse = 0;
-        }
-
         if (playerMove != null)
         {
             playerMove.SetVelocityAccumulation(new Vector2(horVelocity, verVelocity));
             playerMove.SetImpulseAccumulation(new Vector2(horImpulse, verImpulse));
         }
-    }
-
-
-    public void SetPlayerInWind(bool isInWind)
-    {
-        isPlayerInWind = isInWind;
     }
 
     public void GetWindImpulse(Vector2 windDirection, float windStrength)
