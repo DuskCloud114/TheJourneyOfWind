@@ -219,6 +219,8 @@ MonoBehaviour:
   lastGroundedTime: -1
   coyoteTime: 0.1
   isGrounded: 0
+  velocityAccumulation: {x: 0, y: 0}
+  impulseAccumulation: {x: 0, y: 0}
 --- !u!114 &3662150735491638827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7d272305cc6334fa1237f416b4ae95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 12
+  dashSpeed: 9
   isDashing: 0
   dashTime: 0.3
   maxDashCount: 1
