@@ -165,7 +165,7 @@ public class Wind : MonoBehaviour
             else
             {
                 WindManager.Instance.CalculateWindVelocity(GetWindDirection(), GetWindSpeed());
-                Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetVelocityAccumulation());
+                Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetWindVelocityAccumulation());
             }
 
         }
@@ -184,7 +184,7 @@ public class Wind : MonoBehaviour
             else
             {
                 WindManager.Instance.CalculateWindVelocity(GetWindDirection(), -GetWindSpeed());
-                Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetVelocityAccumulation());
+                Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetWindVelocityAccumulation());
             }
         }
     }

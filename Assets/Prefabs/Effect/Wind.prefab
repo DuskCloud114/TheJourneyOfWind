@@ -48,10 +48,14 @@ MonoBehaviour:
   windDirection: 3
   windDuration: 1
   windStrength: 0
+  windType: 0
   affectedArea: {fileID: 0}
-  weakSpeed: -1
-  mediumSpeed: -1
-  strongSpeed: -1
+  weakSpeed: 1
+  mediumSpeed: 2
+  strongSpeed: 4
+  weakImpulse: -1
+  mediumImpulse: -1
+  strongImpulse: -1
   windExistTime: -1
   windInterval: -1
 --- !u!61 &3161521578613559593

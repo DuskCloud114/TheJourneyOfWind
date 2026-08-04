@@ -32,7 +32,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float fastJumpSpeed = -1;
     [SerializeField] private float maxJumpTime = -1;
     [SerializeField] private float jumpCount = 1;
-    private float jumpTimer;
 
     [Header("地面检测")]
     [SerializeField] private LayerMask groundLayer;
@@ -45,6 +44,7 @@ public class PlayerMove : MonoBehaviour
 
     [Header("风场作用")]
     [SerializeField] private Vector2 velocityAccumulation = Vector2.zero;
+    [SerializeField] private Vector2 appliedVelocity = Vector2.zero;
     [SerializeField] private Vector2 impulseAccumulation = Vector2.zero;
 
     void Awake()
@@ -115,6 +115,9 @@ public class PlayerMove : MonoBehaviour
 
         if (playerDash != null && isGrounded) playerDash.ResetDashCount();
 
+        rb.velocity -= appliedVelocity;
+        appliedVelocity = Vector2.zero;
+
         switch (runState)
         {
             case RunState.left:
@@ -127,6 +130,9 @@ public class PlayerMove : MonoBehaviour
                 SpeedUpdate(0);
                 break;
         }
+
+        rb.velocity += velocityAccumulation;
+        appliedVelocity = velocityAccumulation;
     }
 
     public void SetVelocityAccumulation(Vector2 velocity)
@@ -195,6 +201,8 @@ public class PlayerMove : MonoBehaviour
 
     void JumpUpdate(InputAction.CallbackContext context)
     {
+        if (playerDash != null && playerDash.IsDashing) return;
+
         if (context.performed)
         {
             if (isGrounded || (Time.time - lastGroundedTime) < coyoteTime)

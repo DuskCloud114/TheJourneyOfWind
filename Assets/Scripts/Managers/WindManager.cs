@@ -62,7 +62,7 @@ public class WindManager : MonoBehaviour
         verVelocity += windDirection.y * windStrength;
     }
 
-    public Vector2 GetVelocityAccumulation()
+    public Vector2 GetWindVelocityAccumulation()
     {
         return new Vector2(horVelocity, verVelocity);
     }
