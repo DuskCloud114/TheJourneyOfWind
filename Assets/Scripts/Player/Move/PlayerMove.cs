@@ -150,13 +150,13 @@ public class PlayerMove : MonoBehaviour
         {
             if (runState != RunState.right)
             {
-                runState = RunState.left; 
+                runState = RunState.left;
                 spriteRenderer.flipX = true;
-            } 
+            }
         }
         else if (context.ReadValue<float>() > 0)
         {
-            if (runState != RunState.left) 
+            if (runState != RunState.left)
             {
                 runState = RunState.right;
                 spriteRenderer.flipX = false;
@@ -203,21 +203,24 @@ public class PlayerMove : MonoBehaviour
     {
         if (playerDash != null && playerDash.IsDashing) return;
 
+        float windVelocityY = appliedVelocity.y;
+        float playerVerSpeed = rb.velocity.y - windVelocityY;
+
         if (context.performed)
         {
             if (isGrounded || (Time.time - lastGroundedTime) < coyoteTime)
             {
                 lastGroundedTime = -999f;
 
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + windVelocityY);
                 jumpCount--;
             }
         }
         if (context.canceled)
         {
-            if (rb.velocity.y > fastJumpSpeed)
+            if (playerVerSpeed > fastJumpSpeed)
             {
-                rb.velocity = new Vector2(rb.velocity.x, fastJumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, fastJumpSpeed + windVelocityY);
             }
         }
 
