@@ -875,10 +875,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
-      propertyPath: weakImpulse
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: windDuration
       value: 0
       objectReference: {fileID: 0}
@@ -887,12 +883,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
-      propertyPath: mediumImpulse
+      propertyPath: windDirection
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
-      propertyPath: strongImpulse
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3161521578613559593, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: m_Size.y
@@ -966,6 +958,10 @@ PrefabInstance:
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: windType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
+      propertyPath: windDuration
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: windStrength
