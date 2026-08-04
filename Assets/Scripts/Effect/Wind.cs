@@ -156,7 +156,6 @@ public class Wind : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            WindManager.Instance.SetPlayerInWind(true);
 
             if (windType == WindType.impulse)
             {
@@ -176,7 +175,6 @@ public class Wind : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            WindManager.Instance.SetPlayerInWind(false);
 
             if (windType == WindType.impulse)
             {
