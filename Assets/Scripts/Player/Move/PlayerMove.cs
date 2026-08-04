@@ -133,6 +133,8 @@ public class PlayerMove : MonoBehaviour
 
         rb.velocity += velocityAccumulation;
         appliedVelocity = velocityAccumulation;
+
+        rb.AddForce(impulseAccumulation, ForceMode2D.Impulse);
     }
 
     public void SetVelocityAccumulation(Vector2 velocity)

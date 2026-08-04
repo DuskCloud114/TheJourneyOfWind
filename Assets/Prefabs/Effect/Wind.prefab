@@ -53,9 +53,9 @@ MonoBehaviour:
   weakSpeed: 1
   mediumSpeed: 2
   strongSpeed: 4
-  weakImpulse: -1
-  mediumImpulse: -1
-  strongImpulse: -1
+  weakImpulse: 1
+  mediumImpulse: 2
+  strongImpulse: 4
   windExistTime: -1
   windInterval: -1
 --- !u!61 &3161521578613559593
