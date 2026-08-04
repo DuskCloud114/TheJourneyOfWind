@@ -28,12 +28,22 @@ enum WindStrength
     strong
 }
 
+enum WindType
+{
+    none,
+    impulse,
+    sustain
+}
+
 public class Wind : MonoBehaviour
 {
+    bool isOpen = true;
+
     [Header("风相关属性枚举")]
     [SerializeField] private WindDirection windDirection = WindDirection.right;
     [SerializeField] private WindDuration windDuration = WindDuration.intermittent;
     [SerializeField] private WindStrength windStrength = WindStrength.none;
+    [SerializeField] private WindType windType = WindType.none;
     [SerializeField] private BoxCollider2D affectedArea;
 
 
@@ -41,8 +51,11 @@ public class Wind : MonoBehaviour
     [SerializeField] private float weakSpeed = -1;
 
     [SerializeField] private float mediumSpeed = -1;
-    
+
     [SerializeField] private float strongSpeed = -1;
+    [SerializeField] private float weakImpulse = -1;
+    [SerializeField] private float mediumImpulse = -1;
+    [SerializeField] private float strongImpulse = -1;
 
     [Header("风持续时间")]
     [SerializeField] private float windExistTime = -1;
@@ -51,11 +64,23 @@ public class Wind : MonoBehaviour
     [Header("风的开关间隔")]
     [SerializeField] private float windInterval = -1;
     public float WindInterval { get { return windInterval; } set { } }
- 
+
     void Start()
     {
-        if (weakSpeed <= 0 || mediumSpeed <= 0 || strongSpeed <= 0) Debug.LogError(gameObject.name + "风的强度数值设置有误，请检查 Inspector 设置");
-        if (weakSpeed >= mediumSpeed || weakSpeed >= strongSpeed || mediumSpeed >= strongSpeed) Debug.LogError(gameObject.name + "风的强度数值梯度设置有误，请按照 weakSpeed < mediumSpeed < strongSpeed 检查 Inspector 设置");
+        if (windType == WindType.none) Debug.LogError(gameObject.name + "风的类型设置有误，请检查 Inspector 设置");
+
+        if (windType == WindType.sustain)
+        {
+            if (weakSpeed <= 0 || mediumSpeed <= 0 || strongSpeed <= 0) Debug.LogError(gameObject.name + "风的强度数值设置有误，请检查 Inspector 设置");
+            if (weakSpeed >= mediumSpeed || weakSpeed >= strongSpeed || mediumSpeed >= strongSpeed) Debug.LogError(gameObject.name + "风的速度数值梯度设置有误，请按照 weakSpeed < mediumSpeed < strongSpeed 检查 Inspector 设置");
+        }
+        else
+        {
+            if (weakImpulse <= 0 || mediumImpulse <= 0 || strongImpulse <= 0) Debug.LogError(gameObject.name + "风的冲击力数值设置有误，请检查 Inspector 设置");
+            if (weakImpulse >= mediumImpulse || weakImpulse >= strongImpulse || mediumImpulse >= strongImpulse) Debug.LogError(gameObject.name + "风的冲击力数值梯度设置有误，请按照 weakImpulse < mediumImpulse < strongImpulse 检查 Inspector 设置");
+        }
+
+
 
         if (windDuration == WindDuration.intermittent)
         {
@@ -108,6 +133,23 @@ public class Wind : MonoBehaviour
         }
     }
 
+    public float GetWindImpulse()
+    {
+        switch (windStrength)
+        {
+            case WindStrength.none:
+                return 0f;
+            case WindStrength.weak:
+                return weakImpulse;
+            case WindStrength.medium:
+                return mediumImpulse;
+            case WindStrength.strong:
+                return strongImpulse;
+            default:
+                return 0f;
+        }
+    }
+
 
     // TODO: 进入风场和离开风场时的速度检查
     public void OnTriggerEnter2D(Collider2D collision)
@@ -115,8 +157,18 @@ public class Wind : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             WindManager.Instance.SetPlayerInWind(true);
-            WindManager.Instance.calculateWindVelocity(GetWindDirection(), GetWindSpeed());
-            Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetVelocityAccumulation());
+
+            if (windType == WindType.impulse)
+            {
+                WindManager.Instance.GetWindImpulse(GetWindDirection(), GetWindImpulse());
+                Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的冲击力为：" + GetWindImpulse() + "，目前累积冲量为：" + WindManager.Instance.GetWindImpulseAccumulation());
+            }
+            else
+            {
+                WindManager.Instance.CalculateWindVelocity(GetWindDirection(), GetWindSpeed());
+                Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetVelocityAccumulation());
+            }
+
         }
     }
 
@@ -125,8 +177,17 @@ public class Wind : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             WindManager.Instance.SetPlayerInWind(false);
-            WindManager.Instance.calculateWindVelocity(GetWindDirection(), -GetWindSpeed());
-            Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetVelocityAccumulation());
+
+            if (windType == WindType.impulse)
+            {
+                WindManager.Instance.GetWindImpulse(GetWindDirection(), -GetWindImpulse());
+                Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的冲击力为：" + GetWindImpulse() + "，目前累积冲量为：" + WindManager.Instance.GetWindImpulseAccumulation());
+            }
+            else
+            {
+                WindManager.Instance.CalculateWindVelocity(GetWindDirection(), -GetWindSpeed());
+                Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetVelocityAccumulation());
+            }
         }
     }
 }
