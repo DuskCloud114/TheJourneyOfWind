@@ -70,7 +70,6 @@ public class PlayerDash : MonoBehaviour
             {
                 isDashing = false;
                 dashTimer = 0;
-                rb.velocity = Vector2.zero;
             }
         }
     }
