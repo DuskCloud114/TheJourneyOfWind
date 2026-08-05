@@ -211,6 +211,7 @@ MonoBehaviour:
   fastJumpSpeed: 5
   maxJumpTime: 2
   jumpCount: 1
+  maxVerSpeed: 20
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -220,6 +221,7 @@ MonoBehaviour:
   coyoteTime: 0.1
   isGrounded: 0
   velocityAccumulation: {x: 0, y: 0}
+  appliedVelocity: {x: 0, y: 0}
   impulseAccumulation: {x: 0, y: 0}
 --- !u!114 &3662150735491638827
 MonoBehaviour:

@@ -9,7 +9,7 @@ public class WindManager : MonoBehaviour
     private PlayerMove playerMove;
 
     [SerializeField] private float horVelocity = 0;
-    [SerializeField] private float verVelocity = 0;
+    [SerializeField] private float verAcceleration = 0;
     [SerializeField] private float horImpulse = 0;
     [SerializeField] private float verImpulse = 0;
 
@@ -39,7 +39,7 @@ public class WindManager : MonoBehaviour
     {
         if (playerMove != null)
         {
-            playerMove.SetVelocityAccumulation(new Vector2(horVelocity, verVelocity));
+            playerMove.SetVelocityAccumulation(new Vector2(horVelocity, verAcceleration));
             playerMove.SetImpulseAccumulation(new Vector2(horImpulse, verImpulse));
         }
     }
@@ -59,12 +59,12 @@ public class WindManager : MonoBehaviour
     public void CalculateWindVelocity(Vector2 windDirection, float windStrength)
     {
         horVelocity += windDirection.x * windStrength;
-        verVelocity += windDirection.y * windStrength;
+        verAcceleration += windDirection.y * windStrength;
     }
 
     public Vector2 GetWindVelocityAccumulation()
     {
-        return new Vector2(horVelocity, verVelocity);
+        return new Vector2(horVelocity, verAcceleration);
     }
 
 

@@ -32,6 +32,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float fastJumpSpeed = -1;
     [SerializeField] private float maxJumpTime = -1;
     [SerializeField] private float jumpCount = 1;
+    [SerializeField] private float maxVerSpeed = -1;
 
     [Header("地面检测")]
     [SerializeField] private LayerMask groundLayer;
@@ -93,6 +94,7 @@ public class PlayerMove : MonoBehaviour
         if (fastJumpSpeed <= 0) Debug.LogError("玩家预制体的 fastJumpSpeed 速度有误，请检查 inspector");
         if (maxJumpTime <= 0) Debug.LogError("玩家预制体的 maxJumpTime 时间有误，请检查 inspector");
         if (jumpCount <= 0) Debug.LogError("玩家预制体的 jumpCount 次数有误，请检查 inspector");
+        if (maxVerSpeed <= 0) Debug.LogError("玩家预制体的 maxVerSpeed 速度有误，请检查 inspector");
 
         groundCheck = this.gameObject.transform.Find("groundCheck").gameObject.transform;
         if (groundCheck == null) Debug.LogError("玩家预制体缺少 groundCheck，请检查玩家子物体是否挂载了 groundCheck 组件");
@@ -115,7 +117,7 @@ public class PlayerMove : MonoBehaviour
 
         if (playerDash != null && isGrounded) playerDash.ResetDashCount();
 
-        rb.velocity -= appliedVelocity;
+        rb.velocity -= new Vector2(appliedVelocity.x, 0f);
         appliedVelocity = Vector2.zero;
 
         switch (runState)
@@ -131,7 +133,8 @@ public class PlayerMove : MonoBehaviour
                 break;
         }
 
-        rb.velocity += velocityAccumulation;
+        rb.velocity += new Vector2(velocityAccumulation.x, 0);
+        rb.velocity = new Vector2(rb.velocity.x, Mathf.Min(rb.velocity.y + velocityAccumulation.y * Time.fixedDeltaTime, maxVerSpeed));
         appliedVelocity = velocityAccumulation;
 
         rb.AddForce(impulseAccumulation, ForceMode2D.Impulse);

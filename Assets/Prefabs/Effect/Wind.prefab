@@ -53,6 +53,7 @@ MonoBehaviour:
   weakSpeed: 1
   mediumSpeed: 2
   strongSpeed: 4
+  verAcceleration: 30
   weakImpulse: 1
   mediumImpulse: 2
   strongImpulse: 4
