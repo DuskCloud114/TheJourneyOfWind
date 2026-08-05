@@ -11,7 +11,7 @@ public class RoomTransformer : MonoBehaviour
     [SerializeField] private bool canFollowPlayer = false;
     public bool CanFollowPlayer => canFollowPlayer;
     
-    void Start()
+    void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         if (boxCollider == null) Debug.LogError("Room 预制体缺少 BoxCollider2D 组件，请检查 Room 预制体设置");

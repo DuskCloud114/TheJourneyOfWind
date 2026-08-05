@@ -44,3 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e761304d0ee3d004fab7a80eaaefec2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  rooms: []
+  currentRoom: {fileID: 0}
+  maxMoveBounds: {x: 9, y: 5}
+  followSpeed: 1
+  upBound: 0
+  downBound: 0
+  leftBound: 0
+  rightBound: 0
