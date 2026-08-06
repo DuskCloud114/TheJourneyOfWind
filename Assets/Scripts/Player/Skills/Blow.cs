@@ -34,7 +34,6 @@ public class Blow : Skill
     {
         base.OnEnable();
         skillInputAction.Normal.Blow.performed += OnBlowPerformed;
-        skillInputAction.Normal.Blow.canceled += OnBlowPerformed;
         
 
     }
@@ -45,7 +44,6 @@ public class Blow : Skill
         Debug.Log("注销了 Blow 技能");
 
         skillInputAction.Normal.Blow.performed -= OnBlowPerformed;
-        skillInputAction.Normal.Blow.canceled -= OnBlowPerformed;
         base.OnDisable();
     }
 
@@ -66,10 +64,12 @@ public class Blow : Skill
         switch (useType)
         {
             case SkillUseType.weak:
-                Instantiate(weakWind, transform.position, Quaternion.identity);
+                GameObject weakWindBall = Instantiate(weakWind, transform.position, Quaternion.identity);
+                weakWindBall.GetComponent<WindBall>().Init(releaseDirection);
                 break;
             case SkillUseType.strong:
-                Instantiate(strongWind, transform.position, Quaternion.identity);
+                GameObject StrongWindBall = Instantiate(strongWind, transform.position, Quaternion.identity);
+                StrongWindBall.GetComponent<WindBall>().Init(releaseDirection);
                 break;
             default:
                 Debug.LogError("未知的技能使用类型: " + useType);
@@ -80,17 +80,19 @@ public class Blow : Skill
 
     private void OnBlowPerformed(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
+        if (SkillsManager.Instance == null) return;
         if (!SkillsManager.Instance.IsUnlocked(id) || isCooling) return;
 
-        if (context.interaction is TapInteraction)
-        {
-            Debug.Log("玩家点击了 Blow 技能释放按钮，尝试释放弱风技能");
-            TryUseSkill(SkillUseType.weak);
-        }
-        else if (context.interaction is HoldInteraction)
+        if (context.interaction is HoldInteraction)
         {
             Debug.Log("玩家长按了 Blow 技能释放按钮，尝试释放强风技能");
             TryUseSkill(SkillUseType.strong);
+        }
+        else if (context.interaction is TapInteraction)
+        {
+            Debug.Log("玩家点击了 Blow 技能释放按钮，尝试释放弱风技能");
+            TryUseSkill(SkillUseType.weak);
         }
     }
 
