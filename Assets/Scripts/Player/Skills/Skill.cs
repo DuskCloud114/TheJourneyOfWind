@@ -12,9 +12,9 @@ public enum SkillUseType
 public class Skill : MonoBehaviour
 {
     public SkillId id;
-    [SerializeField] protected SkillInputAction skillInputAction = new SkillInputAction();
+    protected SkillInputAction skillInputAction;
     [SerializeField] protected SkillUseType skillUseType;
-    [SerializeField] protected float skillInterval;
+    [SerializeField] protected float skillInterval = -1f;
     [SerializeField] protected float skillTimer;
     [SerializeField] protected Vector2 releaseDirection;
     [SerializeField] protected bool isCooling;
@@ -29,6 +29,8 @@ public class Skill : MonoBehaviour
     {
         playerSprite = GetComponent<SpriteRenderer>();
         if (playerSprite == null) Debug.LogError("Player 身上未挂载 SpriteRenderer 组件，请检查预制体设置");
+
+        if (skillInterval < 0f) Debug.LogError(id + "技能冷却时间未设置，请检查预制体设置");
     }
 
     protected virtual void OnEnable()
@@ -58,11 +60,11 @@ public class Skill : MonoBehaviour
 
     public virtual void TryUseSkill()
     {
-        
+
     }
 
     public virtual void TryUseSkill(SkillUseType useType)
     {
-        
+
     }
 }

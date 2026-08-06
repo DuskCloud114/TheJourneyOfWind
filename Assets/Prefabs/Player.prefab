@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 9192286853413745440}
   - component: {fileID: 9176105989834454164}
   - component: {fileID: 3662150735491638827}
+  - component: {fileID: 413358097433837164}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -211,7 +212,7 @@ MonoBehaviour:
   fastJumpSpeed: 5
   maxJumpTime: 2
   jumpCount: 1
-  maxVerSpeed: 20
+  maxVerSpeed: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -240,3 +241,24 @@ MonoBehaviour:
   dashTime: 0.3
   maxDashCount: 1
   dashCount: 1
+--- !u!114 &413358097433837164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480503351794402457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846f41d5c85ee6c4ab34fe14cff2f83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  skillUseType: 0
+  skillInterval: 0
+  skillTimer: 0
+  releaseDirection: {x: 0, y: 0}
+  isCooling: 0
+  weakWind: {fileID: 3172611603112456760, guid: e07deb1afe020964197717ea8826c60d, type: 3}
+  strongWind: {fileID: 9157856820846825697, guid: 1422efc94d214be4882bc949b4eee77e, type: 3}
+  test: 1

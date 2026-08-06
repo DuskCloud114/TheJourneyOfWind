@@ -10,19 +10,21 @@ public class SkillsManager : MonoBehaviour
 {
     public static SkillsManager Instance;
 
-    private readonly Dictionary<SkillId, Skill> skills = new();
-    private readonly Dictionary<SkillId, bool> skillUnlocked = new();
+    private Dictionary<SkillId, Skill> skills;
+    private Dictionary<SkillId, bool> skillUnlocked;
 
     private void Awake()
     {
+
+        skills = new Dictionary<SkillId, Skill>();
+        skillUnlocked = new Dictionary<SkillId, bool>();
+
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            return;
         }
-
-        Destroy(gameObject);
+        else Destroy(gameObject);
     }
 
     public void RegisterSkill(Skill skill, bool unlocked)
@@ -53,16 +55,5 @@ public class SkillsManager : MonoBehaviour
     public bool IsUnlocked(SkillId id)
     {
         return skillUnlocked.TryGetValue(id, out bool unlocked) && unlocked;
-    }
-
-    public void TryUseSkill(SkillId id, SkillUseType useType)
-    {
-        if (!IsUnlocked(id))
-            return;
-
-        if (skills.TryGetValue(id, out Skill skill))
-        {
-            skill.TryUseSkill(useType);
-        }
     }
 }
