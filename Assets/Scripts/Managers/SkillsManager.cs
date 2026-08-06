@@ -27,16 +27,16 @@ public class SkillsManager : MonoBehaviour
 
     public void RegisterSkill(Skill skill, bool unlocked)
     {
-        skills[skill.Id] = skill;
-        skillUnlocked[skill.Id] = unlocked;
+        skills[skill.id] = skill;
+        skillUnlocked[skill.id] = unlocked;
     }
 
     public void UnregisterSkill(Skill skill)
     {
-        if (skills.TryGetValue(skill.Id, out Skill registeredSkill) &&
+        if (skills.TryGetValue(skill.id, out Skill registeredSkill) &&
             ReferenceEquals(registeredSkill, skill))
         {
-            skills.Remove(skill.Id);
+            skills.Remove(skill.id);
         }
     }
 

@@ -11,26 +11,50 @@ public enum SkillUseType
 
 public class Skill : MonoBehaviour
 {
-    public SkillId Id { get; }
+    public SkillId id;
     [SerializeField] protected SkillInputAction skillInputAction = new SkillInputAction();
     [SerializeField] protected SkillUseType skillUseType;
     [SerializeField] protected float skillInterval;
     [SerializeField] protected float skillTimer;
     [SerializeField] protected Vector2 releaseDirection;
-    [SerializeField] protected bool isUsingSkill;
+    [SerializeField] protected bool isCooling;
+    protected SpriteRenderer playerSprite;
 
+    protected virtual void Awake()
+    {
+        skillInputAction = new SkillInputAction();
+    }
+
+    protected virtual void Start()
+    {
+        playerSprite = GetComponent<SpriteRenderer>();
+        if (playerSprite == null) Debug.LogError("Player 身上未挂载 SpriteRenderer 组件，请检查预制体设置");
+    }
 
     protected virtual void OnEnable()
     {
         skillInputAction.Enable();
+        skillInputAction.Normal.Direction.performed += GetDirection;
+        skillInputAction.Normal.Direction.canceled += GetDirection;
     }
 
     protected virtual void OnDisable()
     {
+        skillInputAction.Normal.Direction.performed -= GetDirection;
+        skillInputAction.Normal.Direction.canceled -= GetDirection;
         skillInputAction.Disable();
     }
 
-    
+    protected virtual void GetDirection(InputAction.CallbackContext context)
+    {
+        releaseDirection = context.ReadValue<Vector2>();
+        if (releaseDirection == Vector2.zero)
+        {
+            releaseDirection = playerSprite.flipX ? Vector2.left : Vector2.right;
+        }
+        releaseDirection = releaseDirection.normalized;
+        Debug.Log("玩家准备向 " + releaseDirection + " 方向释放技能");
+    }
 
     public virtual void TryUseSkill()
     {
