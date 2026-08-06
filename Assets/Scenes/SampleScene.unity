@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horVelocity: 0
-  verVelocity: 0
+  verAcceleration: 0
   horImpulse: 0
   verImpulse: 0
 --- !u!1001 &1031760005
@@ -1407,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: windDuration
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: windInterval
@@ -1416,6 +1416,10 @@ PrefabInstance:
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: windStrength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
+      propertyPath: windDirection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1631666838566036178, guid: 92232f37220d6d048a2279a4bef0fce9, type: 3}
       propertyPath: windExistTime
@@ -1838,6 +1842,10 @@ PrefabInstance:
     - target: {fileID: 6480503351794402457, guid: 2777ffa293ec0ed44b3d7bcde85c778f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176105989834454164, guid: 2777ffa293ec0ed44b3d7bcde85c778f, type: 3}
+      propertyPath: maxVerSpeed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

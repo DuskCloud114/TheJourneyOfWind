@@ -104,6 +104,16 @@ public class CameraManager : MonoBehaviour
         rooms.Remove(room);
     }
 
+    public bool IsCurrentRoomInList(RoomTransformer room)
+    {
+        if (currentRoom == null || !rooms.Contains(currentRoom))
+        {
+            currentRoom = room;
+            return false;
+        }
+        else return true;
+    }
+
     public void SwitchToRoom()
     {
         if (rooms.Count == 0) return;

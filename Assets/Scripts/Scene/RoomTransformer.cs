@@ -23,6 +23,10 @@ public class RoomTransformer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CameraManager.Instance.EnterRoom(this);
+            if (!CameraManager.Instance.IsCurrentRoomInList(this))
+            {
+                CameraManager.Instance.SwitchToRoom();
+            }
         }
     }
 
