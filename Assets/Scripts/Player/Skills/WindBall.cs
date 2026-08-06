@@ -5,6 +5,7 @@ using UnityEngine;
 public class WindBall : MonoBehaviour
 {
     [SerializeField] private float speed = -1f;
+    [SerializeField] private float lifeTime = -1f;
     private CircleCollider2D circleCollider;
     private Rigidbody2D rb;
     private Vector2 direction;
@@ -13,6 +14,9 @@ public class WindBall : MonoBehaviour
     void Awake()
     {
         if (speed <= 0) Debug.LogError("风弹速度未设置，请检查预制体设置");
+
+        if (lifeTime <= 0) Debug.LogError("风弹存在时长未设置，请检查预制体设置");
+
         circleCollider = GetComponent<CircleCollider2D>();
         if (circleCollider == null) Debug.LogError("风弹未挂载 CircleCollider2D 组件，请检查预制体设置");
 
