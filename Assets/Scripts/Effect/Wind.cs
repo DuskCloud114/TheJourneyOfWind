@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,7 +38,11 @@ enum WindType
 
 public class Wind : MonoBehaviour
 {
+    public Action<Wind, bool> WindStateChanged;
+
     bool isOpen = true;
+    public bool IsOpen { get { return isOpen; } set { } }
+
 
     [Header("风相关属性枚举")]
     [SerializeField] private WindDirection windDirection = WindDirection.right;
@@ -173,6 +178,15 @@ public class Wind : MonoBehaviour
             }
 
         }
+
+        else if (collision.CompareTag("Cloud"))
+        {
+            Cloud cloud = collision.GetComponent<Cloud>();
+            if (cloud != null)
+            {
+                cloud.EnterWind(this);
+            }
+        }
     }
 
     void ApplyImpulse()
@@ -210,6 +224,14 @@ public class Wind : MonoBehaviour
             else
             {
                 RemoveVelocity();
+            }
+        }
+        else if (collision.CompareTag("Cloud"))
+        {
+            Cloud cloud = collision.GetComponent<Cloud>();
+            if (cloud != null)
+            {
+                cloud.ExitWind(this);
             }
         }
     }
@@ -266,6 +288,7 @@ public class Wind : MonoBehaviour
         if (this.isOpen == isOpen) return;
 
         this.isOpen = isOpen;
+        WindStateChanged?.Invoke(this, isOpen);
         if (isOpen && isPlayerInside)
         {
             ApplyVelocity();

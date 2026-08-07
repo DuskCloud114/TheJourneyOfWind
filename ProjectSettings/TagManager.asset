@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Fire
+  - WindBall
+  - Cloud
   layers:
   - Default
   - TransparentFX
