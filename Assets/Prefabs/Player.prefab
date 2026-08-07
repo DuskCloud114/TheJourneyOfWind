@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   skillUseType: 0
-  skillInterval: 5
+  skillInterval: 2
   skillTimer: 0
   releaseDirection: {x: 0, y: 0}
   isCooling: 0

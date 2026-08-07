@@ -2,10 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WindBallState
+{
+    none,
+    weak,
+    strong
+}
+
 public class WindBall : MonoBehaviour
 {
+    [SerializeField] WindBallState windBallState = WindBallState.none;
     [SerializeField] private float speed = -1f;
     [SerializeField] private float lifeTime = -1f;
+    private float lifeTimer = 0f;
     private CircleCollider2D circleCollider;
     private Rigidbody2D rb;
     private Vector2 direction;
@@ -13,6 +22,8 @@ public class WindBall : MonoBehaviour
 
     void Awake()
     {
+        if (windBallState == WindBallState.none) Debug.LogError("风弹状态未设置，请检查预制体设置");
+
         if (speed <= 0) Debug.LogError("风弹速度未设置，请检查预制体设置");
 
         if (lifeTime <= 0) Debug.LogError("风弹存在时长未设置，请检查预制体设置");
@@ -42,6 +53,12 @@ public class WindBall : MonoBehaviour
     void Update()
     {
         if (rb != null) rb.velocity = direction * speed;
+
+        lifeTimer += Time.deltaTime;
+        if (lifeTimer >= lifeTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Init(Vector2 dir)
@@ -54,10 +71,18 @@ public class WindBall : MonoBehaviour
         if (collider.CompareTag("Fire"))
         {
             Debug.Log("风弹击中火焰");
+            collider.GetComponent<Fire>()?.SwitchState(windBallState);
             Destroy(gameObject);
         }
 
-        if ((1 << collider.gameObject.layer) == groundLayer.value)
+        else if (collider.CompareTag("Cloud"))
+        {
+            Debug.Log("风弹击中云");
+            collider.GetComponent<Cloud>()?.ChangeDirection(direction);
+            Destroy(gameObject);
+        }
+
+        else if ((1 << collider.gameObject.layer) == groundLayer.value)
         {
             Destroy(gameObject);
         }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4287364868970732911}
   - component: {fileID: 4923665070196880442}
   - component: {fileID: 1780118607980841232}
+  - component: {fileID: 757237644617113225}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Fire
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3348264094450887059}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.8132, y: -0.4487, z: 0}
-  m_LocalScale: {x: 0.3936, y: 0.367, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3936, y: 0.32442802, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -143,3 +144,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3df1164fb051644b355dea27beb902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &757237644617113225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3348264094450887059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581cd3923b27bfd42ac36c696705cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudPrefab: {fileID: 6246921084783512622, guid: d539f39bad7a7d44cb4c84b09d260730, type: 3}
+  fireState: 0
+  spawnCloudInterval: 15
+  spawnCloudTimer: 0
+  spawnOffsetDistance: 0.5
