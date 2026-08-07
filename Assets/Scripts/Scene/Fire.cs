@@ -44,6 +44,7 @@ public class Fire : MonoBehaviour
         if (windBallState == WindBallState.strong)
         {
             fireState = FireState.extinguished;
+            spawnCloudTimer = 0f;
             Death death = GetComponent<Death>();
             if (death != null) death.enabled = false;
         }
