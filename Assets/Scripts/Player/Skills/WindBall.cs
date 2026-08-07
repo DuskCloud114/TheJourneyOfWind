@@ -51,6 +51,12 @@ public class WindBall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.CompareTag("Fire"))
+        {
+            Debug.Log("风弹击中火焰");
+            Destroy(gameObject);
+        }
+
         if ((1 << collider.gameObject.layer) == groundLayer.value)
         {
             Destroy(gameObject);
