@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!28 &-7766547568878532896
+--- !u!28 &-9143421851175209511
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +48,7 @@ Texture2D:
     offset: 0
     size: 0
     path: 
---- !u!21 &-1794417575836980019
+--- !u!21 &-8502303430617717194
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -7766547568878532896}
+        m_Texture: {fileID: -9143421851175209511}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: NotoSerifSC-Black SDF
   m_EditorClassIdentifier: 
   hashCode: 0
-  material: {fileID: -1794417575836980019}
+  material: {fileID: -8502303430617717194}
   materialHashCode: 0
   m_Version: 1.1.0
   m_SourceFontFileGUID: ce34a3a5990523742a642d4133540c89
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -7766547568878532896}
+  - {fileID: -9143421851175209511}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
   m_ClearDynamicDataOnBuild: 0
