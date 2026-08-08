@@ -43,7 +43,6 @@ public class Cloud : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = moveDirection.normalized * speed + velocityAccumulation;
-        Debug.Log("云的移动方向为: " + moveDirection.normalized + "，速度为: " + moveDirection.normalized * speed + velocityAccumulation);
     }
 
     void OnDestroy()

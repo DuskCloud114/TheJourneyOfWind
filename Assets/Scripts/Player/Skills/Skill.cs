@@ -55,7 +55,7 @@ public class Skill : MonoBehaviour
             releaseDirection = playerSprite.flipX ? Vector2.left : Vector2.right;
         }
         releaseDirection = releaseDirection.normalized;
-        Debug.Log("玩家准备向 " + releaseDirection + " 方向释放技能");
+        // Debug.Log("玩家准备向 " + releaseDirection + " 方向释放技能");
     }
 
     public virtual void TryUseSkill()

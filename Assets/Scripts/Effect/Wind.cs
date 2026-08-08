@@ -192,7 +192,7 @@ public class Wind : MonoBehaviour
     void ApplyImpulse()
     {
         WindManager.Instance.GetWindImpulse(GetWindDirection(), GetWindImpulse());
-        Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的冲击力为：" + GetWindImpulse() + "，目前累积冲量为：" + WindManager.Instance.GetWindImpulseAccumulation());
+        // Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的冲击力为：" + GetWindImpulse() + "，目前累积冲量为：" + WindManager.Instance.GetWindImpulseAccumulation());
     }
 
     void ApplyVelocity()
@@ -208,7 +208,7 @@ public class Wind : MonoBehaviour
             speed += verAcceleration;
         }
         WindManager.Instance.CalculateWindVelocity(direction, speed);
-        Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetWindVelocityAccumulation());
+        // Debug.Log("玩家进入风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetWindVelocityAccumulation());
     }
 
     public void OnTriggerExit2D(Collider2D collision)
@@ -239,7 +239,7 @@ public class Wind : MonoBehaviour
     void RemoveImpulse()
     {
         WindManager.Instance.GetWindImpulse(GetWindDirection(), -GetWindImpulse());
-        Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的冲击力为：" + GetWindImpulse() + "，目前累积冲量为：" + WindManager.Instance.GetWindImpulseAccumulation());
+        // Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的冲击力为：" + GetWindImpulse() + "，目前累积冲量为：" + WindManager.Instance.GetWindImpulseAccumulation());
     }
 
     void RemoveVelocity()
@@ -255,7 +255,7 @@ public class Wind : MonoBehaviour
             speed += verAcceleration;
         }
         WindManager.Instance.CalculateWindVelocity(direction, -speed);
-        Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetWindVelocityAccumulation());
+        // Debug.Log("玩家离开风区 " + gameObject.name + "，风的方向为：" + GetWindDirection() + "，风的速度为：" + GetWindSpeed() + "，目前累积速度为：" + WindManager.Instance.GetWindVelocityAccumulation());
     }
 
     private void IntermittentWindControl()
@@ -268,7 +268,7 @@ public class Wind : MonoBehaviour
             {
                 SwitchWindState(false);
                 windExistTimer = 0f;
-                Debug.Log("风区 " + gameObject.name + " 风关闭");
+                // Debug.Log("风区 " + gameObject.name + " 风关闭");
             }
         }
         else
@@ -278,7 +278,7 @@ public class Wind : MonoBehaviour
             {
                 SwitchWindState(true);
                 windIntervalTimer = 0f;
-                Debug.Log("风区 " + gameObject.name + " 风开启");
+                // Debug.Log("风区 " + gameObject.name + " 风开启");
             }
         }
     }
