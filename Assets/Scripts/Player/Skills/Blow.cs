@@ -39,9 +39,12 @@ public class Blow : Skill
     }
     protected override void OnDisable()
     {
-        if (SkillsManager.Instance != null) SkillsManager.Instance.UnregisterSkill(this);
+        if (SkillsManager.Instance != null)
+        {
+            SkillsManager.Instance.UnregisterSkill(this);
+            Debug.Log("注销了 Blow 技能");
+        }
         else Debug.LogError("SkillsManager 不存在实例");
-        Debug.Log("注销了 Blow 技能");
 
         skillInputAction.Normal.Blow.performed -= OnBlowPerformed;
         base.OnDisable();
