@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 5441517289855179575}
   dialogueText: {fileID: 1794690938319506236}
+  promptPanel: {fileID: 6566676009606155796}
+  promptText: {fileID: 7703128092547778439}
   hideDelay: 5
 --- !u!1001 &5826586594359985638
 PrefabInstance:
@@ -166,3 +168,19 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 629507209562554725, guid: 1b51c0cfa773c78429f965b520f9c354, type: 3}
   m_PrefabInstance: {fileID: 5826586594359985638}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6566676009606155796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 864045349692951538, guid: 1b51c0cfa773c78429f965b520f9c354, type: 3}
+  m_PrefabInstance: {fileID: 5826586594359985638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7703128092547778439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4196004158480171617, guid: 1b51c0cfa773c78429f965b520f9c354, type: 3}
+  m_PrefabInstance: {fileID: 5826586594359985638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

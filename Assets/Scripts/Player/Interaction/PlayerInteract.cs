@@ -55,7 +55,7 @@ public class PlayerInteract : MonoBehaviour
         {
             currentInteractionPoint = null;
             isInteracting = false;
-            UIManager.Instance.Hide(); // 隐藏对话框
+            UIManager.Instance.HideDialogue(); // 隐藏对话框
         }
     }
 
@@ -63,6 +63,7 @@ public class PlayerInteract : MonoBehaviour
     {
         if (context.performed)
         {
+            UIManager.Instance.HidePrompt(); // 隐藏提示框
             Debug.Log("玩家按下交互键");
             if (isInteracting && currentInteractionPoint != null)
             {

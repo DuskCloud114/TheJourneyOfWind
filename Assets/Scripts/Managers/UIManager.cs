@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private GameObject promptPanel;
+    [SerializeField] private TextMeshProUGUI promptText;
 
     [Header("对话关闭")]
     [SerializeField] private float hideDelay = -1f; // 对话框隐藏延迟时间
@@ -24,7 +26,8 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Hide();
+        HideDialogue();
+        HidePrompt();
     }
 
     void Start()
@@ -33,9 +36,12 @@ public class UIManager : MonoBehaviour
 
         if (dialoguePanel == null) Debug.LogError("UIManager 未找到 dialoguePanel，请在 Inspector 中分配。");
         if (dialogueText == null) Debug.LogError("UIManager 未找到 dialogueText，请在 Inspector 中分配。");
+
+        if (promptPanel == null) Debug.LogError("UIManager 未找到 promptPanel，请在 Inspector 中分配。");
+        if (promptText == null) Debug.LogError("UIManager 未找到 promptText，请在 Inspector 中分配。");
     }
 
-    public void Hide()
+    public void HideDialogue()
     {
         // 离开范围时取消进行中的协程
         if (hideDialogueCoroutine != null)
@@ -47,6 +53,12 @@ public class UIManager : MonoBehaviour
         dialoguePanel.SetActive(false);
     }
 
+    public void HidePrompt()
+    {
+        promptPanel.SetActive(false);
+    }
+
+
     public void ShowDialogue(string text, bool isLast = false)
     {
         dialoguePanel.SetActive(true);
@@ -57,11 +69,16 @@ public class UIManager : MonoBehaviour
             hideDialogueCoroutine = StartCoroutine(HideDialogueAfterDelay(hideDelay));
         }
     }
+    public void ShowPrompt(string text)
+    {
+        promptPanel.SetActive(true);
+        promptText.text = text;
+    }
 
     IEnumerator HideDialogueAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Hide();
+        HideDialogue();
         hideDialogueCoroutine = null;
     }
 }

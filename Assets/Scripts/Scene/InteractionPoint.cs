@@ -59,6 +59,7 @@ public class InteractionPoint : MonoBehaviour
             PlayerInteract playerInteract = other.GetComponent<PlayerInteract>();
             if (playerInteract != null)
             {
+                UIManager.Instance.ShowPrompt(interactionPrompt);
                 playerInteract.IsInteracting = true;
                 playerInteract.SetCurrentInteractionPoint(this);
                 Debug.Log("玩家进入交互点范围，允许交互。");
@@ -74,6 +75,7 @@ public class InteractionPoint : MonoBehaviour
             PlayerInteract playerInteract = other.GetComponent<PlayerInteract>();
             if (playerInteract != null)
             {
+                UIManager.Instance.HidePrompt();
                 playerInteract.IsInteracting = false;
                 playerInteract.RemoveCurrentInteractionPoint(this);
                 Debug.Log("玩家离开交互点范围，禁止交互。");
