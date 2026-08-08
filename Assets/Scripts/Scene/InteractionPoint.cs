@@ -34,6 +34,24 @@ public class InteractionPoint : MonoBehaviour
         
     }
 
+    public int GetDialogueLength()
+    {
+        if (dialogueData == null) 
+        {
+            Debug.LogError("DialogueData 未设置，请在 Inspector 中分配对话数据。");
+            return 0;
+        }
+        else
+        {
+            return dialogueData.dialogueLines.Length;
+        }
+    }
+
+    public int GetDialogueIndex()
+    {
+        return index;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

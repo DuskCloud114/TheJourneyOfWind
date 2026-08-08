@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 5441517289855179575}
   dialogueText: {fileID: 1794690938319506236}
+  hideDelay: 5
 --- !u!1001 &5826586594359985638
 PrefabInstance:
   m_ObjectHideFlags: 0

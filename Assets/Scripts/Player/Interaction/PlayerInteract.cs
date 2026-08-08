@@ -40,7 +40,7 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetCurrentInteractionPoint(InteractionPoint interactionPoint)
@@ -67,13 +67,16 @@ public class PlayerInteract : MonoBehaviour
             if (isInteracting && currentInteractionPoint != null)
             {
                 string dialogue = currentInteractionPoint.GetDialogue();
+                int index = currentInteractionPoint.GetDialogueIndex(); // 当前播放对话
+                int length = currentInteractionPoint.GetDialogueLength(); // 对话句子数
+                bool isLast = length > 0 && (index >= length - 1); // 是否是最后一句对话
                 if (!string.IsNullOrEmpty(dialogue))
                 {
-                    UIManager.Instance.ShowDialogue(dialogue);
+                    UIManager.Instance.ShowDialogue(dialogue, isLast);
                 }
                 else
                 {
-                    UIManager.Instance.ShowDialogue("当前交互点没有对话内容。");
+                    UIManager.Instance.ShowDialogue("当前交互点没有对话内容。", true);
                 }
             }
             else
