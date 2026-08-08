@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 9176105989834454164}
   - component: {fileID: 3662150735491638827}
   - component: {fileID: 413358097433837164}
+  - component: {fileID: 5786725751071157855}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -262,3 +263,16 @@ MonoBehaviour:
   weakWind: {fileID: 3172611603112456760, guid: e07deb1afe020964197717ea8826c60d, type: 3}
   strongWind: {fileID: 9157856820846825697, guid: 1422efc94d214be4882bc949b4eee77e, type: 3}
   test: 1
+--- !u!114 &5786725751071157855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480503351794402457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4320260326f53499b834da2a2bcf31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteracting: 0

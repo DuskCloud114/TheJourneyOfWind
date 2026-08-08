@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "InteractInputAction",
+    "maps": [
+        {
+            "name": "Normal",
+            "id": "688d375e-7345-41ba-8859-305b087cd834",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "2638bb92-42ac-4adf-bd0f-7345540db5fe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f5827206-59ed-4cc8-bb89-54b17b5c5948",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
