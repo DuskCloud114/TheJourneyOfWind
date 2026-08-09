@@ -12,6 +12,7 @@ public enum WindBallState
 public class WindBall : MonoBehaviour
 {
     [SerializeField] WindBallState windBallState = WindBallState.none;
+    public WindBallState WindBallStateValue { get { return windBallState; } }
     [SerializeField] private float speed = -1f;
     [SerializeField] private float lifeTime = -1f;
     private float lifeTimer = 0f;
@@ -79,6 +80,17 @@ public class WindBall : MonoBehaviour
         {
             Debug.Log("风弹击中云");
             collider.GetComponent<Cloud>()?.ChangeDirection(direction);
+            Destroy(gameObject);
+        }
+
+        else if (collider.CompareTag("Barrier"))
+        {
+            Debug.Log("风弹击中障碍物");
+            Barrier barrier = collider.GetComponent<Barrier>();
+            if (barrier != null)
+            {
+                barrier.TakeDamage(windBallState == WindBallState.weak ? 1 : 2);
+            }
             Destroy(gameObject);
         }
 
