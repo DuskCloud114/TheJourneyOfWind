@@ -8,6 +8,7 @@ TagManager:
   - Fire
   - WindBall
   - Cloud
+  - Barrier
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2495390303
+    locked: 0
+  - name: Stage
+    uniqueID: 2815861789
     locked: 0

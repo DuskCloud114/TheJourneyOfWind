@@ -8,6 +8,7 @@ public class PlayerDash : MonoBehaviour
     private DashInputAction dashInputAction;
     [Header("其他组件引用")]
     private SpriteRenderer spriteRenderer;
+    private PlayerAnim playerAnim;
 
     [Header("冲刺数据")]
     [SerializeField] private float dashSpeed = -1;
@@ -25,6 +26,7 @@ public class PlayerDash : MonoBehaviour
     void Awake()
     {
         dashInputAction = new DashInputAction();
+        playerAnim = this.gameObject.GetComponent<PlayerAnim>();
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -69,6 +71,7 @@ public class PlayerDash : MonoBehaviour
             if (dashTimer >= dashTime)
             {
                 isDashing = false;
+                playerAnim.SetIsDashing(isDashing);
                 dashTimer = 0;
             }
         }
@@ -93,6 +96,7 @@ public class PlayerDash : MonoBehaviour
             if (dashCount > 0)
             {
                 isDashing = true;
+                playerAnim.SetIsDashing(isDashing);
 
                 rb.velocity = dashDirection.normalized * dashSpeed;
 

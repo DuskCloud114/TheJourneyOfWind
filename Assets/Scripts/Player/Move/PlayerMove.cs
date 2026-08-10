@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float maxGravityScale;
     private PlayerDash playerDash;
+    private PlayerAnim playerAnim;
 
     [Header("水平移动数据")]
     [SerializeField] private float runSpeed = -1;
@@ -52,6 +53,7 @@ public class PlayerMove : MonoBehaviour
     {
         moveInputAction = new MoveInputAction();
         playerDash = this.gameObject.GetComponent<PlayerDash>();
+        playerAnim = this.gameObject.GetComponent<PlayerAnim>();
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -84,6 +86,8 @@ public class PlayerMove : MonoBehaviour
         if (rb != null) maxGravityScale = rb.gravityScale;
 
         if (playerDash == null) Debug.LogError("玩家预制体缺少 PlayerDash 组件，请检查玩家身上是否挂载了 PlayerDash 组件");
+
+        if (playerAnim == null) Debug.LogError("玩家预制体缺少 PlayerAnim 组件，请检查玩家身上是否挂载了 PlayerAnim 组件");
 
         if (spriteRenderer == null) Debug.LogError("玩家预制体缺少 SpriteRenderer 组件，请检查玩家身上是否挂载了 SpriteRenderer 组件");
 
@@ -171,6 +175,8 @@ public class PlayerMove : MonoBehaviour
         {
             runState = RunState.stay;
         }
+
+        playerAnim.SetIsRunning(runState != RunState.stay);
     }
 
     void SpeedUpdate(int direction)
@@ -202,6 +208,8 @@ public class PlayerMove : MonoBehaviour
         {
             isGrounded = false;
         }
+        
+        playerAnim.SetIsGrounded(isGrounded);
     }
 
     void JumpUpdate(InputAction.CallbackContext context)
@@ -219,6 +227,7 @@ public class PlayerMove : MonoBehaviour
 
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + windVelocityY);
                 jumpCount--;
+                playerAnim.SetIsJumping(true);
             }
         }
         if (context.canceled)
@@ -227,6 +236,11 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, fastJumpSpeed + windVelocityY);
             }
+        }
+
+        if ((!context.performed && !context.canceled) || rb.velocity.y < 0 || isGrounded)
+        {
+            playerAnim.SetIsJumping(false);
         }
 
     }
