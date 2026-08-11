@@ -15,6 +15,18 @@ public class Fire : MonoBehaviour
     [SerializeField] private float spawnCloudInterval = -1f;
     [SerializeField] private float spawnCloudTimer;
     [SerializeField] private float spawnOffsetDistance = -1f;
+    private Animator fireAnim;
+    private Death death;
+
+    void Awake()
+    {
+        fireAnim = GetComponent<Animator>();
+        if (fireAnim == null) Debug.LogError("Fire " + gameObject.name + "上未挂载 Animator，请检查 Fire 预制体设置");
+        fireAnim.SetBool("IsBurning", fireState == FireState.burning);
+
+        death = GetComponent<Death>();
+        if (death == null) Debug.LogError("Fire " + gameObject.name + "上未挂载 Death，请检查 Fire 预制体设置");
+    }
 
     void Start()
     {
@@ -45,13 +57,13 @@ public class Fire : MonoBehaviour
         {
             fireState = FireState.extinguished;
             spawnCloudTimer = 0f;
-            Death death = GetComponent<Death>();
+            fireAnim.SetBool("IsBurning", false);
             if (death != null) death.enabled = false;
         }
         if (windBallState == WindBallState.weak)
         {
             fireState = FireState.burning;
-            Death death = GetComponent<Death>();
+            fireAnim.SetBool("IsBurning", true);
             if (death != null) death.enabled = true;
         }
     }

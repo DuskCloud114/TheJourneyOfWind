@@ -14,6 +14,8 @@ public class Death : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (isActiveAndEnabled == false) return;
+
         if (other.CompareTag("Player"))
         {
             Debug.Log("玩家死亡，回到上次存档点");
