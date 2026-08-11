@@ -84,10 +84,7 @@ public class Wind : MonoBehaviour
     {
         collidersInWind = new List<Collider2D>();
         blowablesInWind = new HashSet<Blowable>();
-    }
 
-    void Start()
-    {
         if (windType == WindType.none) Debug.LogError(gameObject.name + "风的类型设置有误，请检查 Inspector 设置");
 
         if (weakSpeed <= 0 || mediumSpeed <= 0 || strongSpeed <= 0) Debug.LogError(gameObject.name + "风的强度数值设置有误，请检查预制体和 inspector 设置");
@@ -95,7 +92,7 @@ public class Wind : MonoBehaviour
 
         if (weakImpulse <= 0 || mediumImpulse <= 0 || strongImpulse <= 0) Debug.LogError(gameObject.name + "风的冲击力数值设置有误，请检查预制体和 inspector 设置");
         if (weakImpulse >= mediumImpulse || weakImpulse >= strongImpulse || mediumImpulse >= strongImpulse) Debug.LogError(gameObject.name + "风的冲击力数值梯度设置有误，请按照 weakImpulse < mediumImpulse < strongImpulse 检查预制体和 inspector 设置");
-        
+
         if (verAcceleration <= 0) Debug.LogError(gameObject.name + "风的垂直加速度数值设置有误，请检查预制体和 inspector 设置");
 
         if (windDuration == WindDuration.intermittent)
@@ -109,9 +106,32 @@ public class Wind : MonoBehaviour
         if (blowableLayer == 0) Debug.LogError(gameObject.name + "风预制体缺少 blowableLayer 设置，请检查风预制体身上是否设置了 blowableLayer");
     }
 
+    void Start()
+    {
+
+    }
+
     void Update()
     {
         if (windDuration == WindDuration.intermittent) IntermittentWindControl();
+    }
+
+    void OnEnable()
+    {
+        RefreshItemsInWind();
+        Debug.Log("执行了风的 OnEnable 方法，当前风区 " + gameObject.name + " 内的物体数量：" + collidersInWind.Count + "，其中 Blowable 数量：" + blowablesInWind.Count);
+    }
+
+    private void OnDisable()
+    {
+        foreach (Blowable blowable in blowablesInWind)
+        {
+            if (blowable != null)
+                blowable.ExitWind(this);
+        }
+
+        blowablesInWind.Clear();
+        collidersInWind.Clear();
     }
 
     public Vector2 GetWindDirection()
@@ -173,9 +193,27 @@ public class Wind : MonoBehaviour
         }
     }
 
+    private bool IsInLayerMask(GameObject target, LayerMask mask)
+    {
+        return (mask.value & (1 << target.layer)) != 0;
+    }
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if (IsInLayerMask(collision.gameObject, blowableLayer))
+        {
+            Blowable blowable = collision.GetComponentInParent<Blowable>();
+
+            if (blowable != null && blowablesInWind.Add(blowable))
+            {
+                blowable.EnterWind(this);
+                Debug.Log($"当前有 {blowablesInWind.Count} 个可吹动物体");
+            }
+
+            return;
+        }
+
         if (collision.CompareTag("Player"))
         {
             isPlayerInside = true;
@@ -225,6 +263,19 @@ public class Wind : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        if (IsInLayerMask(collision.gameObject, blowableLayer))
+        {
+            Blowable blowable = collision.GetComponentInParent<Blowable>();
+
+            if (blowable != null && blowablesInWind.Remove(blowable))
+            {
+                blowable.ExitWind(this);
+                Debug.Log($"当前有 {blowablesInWind.Count} 个可吹动物体");
+            }
+
+            return;
+        }
+
         if (collision.CompareTag("Player"))
         {
             isPlayerInside = false;
@@ -300,14 +351,23 @@ public class Wind : MonoBehaviour
     {
         collidersInWind.Clear();
 
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(affectedArea.bounds.center, affectedArea.bounds.size, 0f, blowableLayer);
-        foreach (var collider in colliders)
+        // TODO: 学习该部分代码
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(blowableLayer);
+        filter.useTriggers = true;
+
+        collidersInWind.Clear();
+
+        int count = affectedArea.OverlapCollider(filter, collidersInWind);
+
+        for (int i = 0; i < count; i++)
         {
-            collidersInWind.Add(collider);
-            Blowable blowable = collider.GetComponent<Blowable>();
-            if (blowable != null)
+            Blowable blowable =
+                collidersInWind[i].GetComponentInParent<Blowable>();
+
+            if (blowable != null && blowablesInWind.Add(blowable))
             {
-                blowablesInWind.Add(blowable);
+                blowable.EnterWind(this);
             }
         }
 
