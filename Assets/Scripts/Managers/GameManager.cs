@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject processManager;
     public GameObject cameraManager;
     public GameObject windManager;
+    public Vector2 lastSpawnPoint;
 
     void Awake()
     {
@@ -34,5 +35,28 @@ public class GameManager : MonoBehaviour
         if (processManager == null) Debug.LogError("GameManager上未挂载 processManager，请检查 GameManager 预制体设置");
         if (cameraManager == null) Debug.LogError("GameManager上未挂载 cameraManager，请检查 GameManager 预制体设置");
         if (windManager == null) Debug.LogError("GameManager上未挂载 windManager，请检查 GameManager 预制体设置");
+
+        lastSpawnPoint = GameObject.FindWithTag("FirstSpawnPoint")?.transform.position ?? Vector2.zero;
+        InitializeManagers();
+    }
+
+    void InitializeManagers()
+    {
+        if (playerPrefab != null) Instantiate(playerPrefab);
+        
+        if (UIManager != null) Instantiate(UIManager);
+        
+        if (audioManager != null) Instantiate(audioManager);
+        
+        if (sceneManager != null) Instantiate(sceneManager);
+        
+        if (skillsManager != null) Instantiate(skillsManager);
+
+        if (processManager != null) Instantiate(processManager);
+        processManager.GetComponent<ProcessManager>().SetLastSpawnPosition(lastSpawnPoint);
+
+        if (cameraManager != null) Instantiate(cameraManager);
+        
+        if (windManager != null) Instantiate(windManager);
     }
 }
