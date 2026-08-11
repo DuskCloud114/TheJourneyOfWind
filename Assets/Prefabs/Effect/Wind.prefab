@@ -59,6 +59,9 @@ MonoBehaviour:
   strongImpulse: 4
   windExistTime: -1
   windInterval: -1
+  blowableLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!61 &3161521578613559593
 BoxCollider2D:
   m_ObjectHideFlags: 0

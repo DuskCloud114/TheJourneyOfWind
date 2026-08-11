@@ -75,10 +75,20 @@ public class Wind : MonoBehaviour
     private bool hasApplied;
     private bool isPlayerInside = false;
 
+    [Header("wind 范围内的物体处理")]
+    private List<Collider2D> collidersInWind;
+    private HashSet<Blowable> blowablesInWind;
+    [SerializeField] private LayerMask blowableLayer;
+
+    void Awake()
+    {
+        collidersInWind = new List<Collider2D>();
+        blowablesInWind = new HashSet<Blowable>();
+    }
+
     void Start()
     {
         if (windType == WindType.none) Debug.LogError(gameObject.name + "风的类型设置有误，请检查 Inspector 设置");
-
 
         if (weakSpeed <= 0 || mediumSpeed <= 0 || strongSpeed <= 0) Debug.LogError(gameObject.name + "风的强度数值设置有误，请检查预制体和 inspector 设置");
         if (weakSpeed >= mediumSpeed || weakSpeed >= strongSpeed || mediumSpeed >= strongSpeed) Debug.LogError(gameObject.name + "风的速度数值梯度设置有误，请按照 weakSpeed < mediumSpeed < strongSpeed 检查预制体和 inspector 设置");
@@ -95,6 +105,8 @@ public class Wind : MonoBehaviour
 
         affectedArea = this.gameObject.GetComponent<BoxCollider2D>();
         if (affectedArea == null) Debug.LogError(gameObject.name + "风预制体缺少 BoxCollider2D 组件，请检查风预制体身上是否挂载了 BoxCollider2D 组件");
+
+        if (blowableLayer == 0) Debug.LogError(gameObject.name + "风预制体缺少 blowableLayer 设置，请检查风预制体身上是否设置了 blowableLayer");
     }
 
     void Update()
@@ -279,8 +291,27 @@ public class Wind : MonoBehaviour
                 SwitchWindState(true);
                 windIntervalTimer = 0f;
                 // Debug.Log("风区 " + gameObject.name + " 风开启");
+                RefreshItemsInWind();
             }
         }
+    }
+
+    private void RefreshItemsInWind()
+    {
+        collidersInWind.Clear();
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(affectedArea.bounds.center, affectedArea.bounds.size, 0f, blowableLayer);
+        foreach (var collider in colliders)
+        {
+            collidersInWind.Add(collider);
+            Blowable blowable = collider.GetComponent<Blowable>();
+            if (blowable != null)
+            {
+                blowablesInWind.Add(blowable);
+            }
+        }
+
+        Debug.Log("风区 " + gameObject.name + " 内的物体数量：" + collidersInWind.Count + "，其中 Blowable 数量：" + blowablesInWind.Count);
     }
 
     public void SwitchWindState(bool isOpen)
