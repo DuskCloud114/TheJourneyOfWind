@@ -9,6 +9,7 @@ TagManager:
   - WindBall
   - Cloud
   - Barrier
+  - FirstSpawnPoint
   layers:
   - Default
   - TransparentFX

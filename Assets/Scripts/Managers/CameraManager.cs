@@ -41,7 +41,8 @@ public class CameraManager : MonoBehaviour
         }
         if (mainCamera == null) Debug.LogError("场景中不存在 Camera，请检查场景中是否有 Camera 组件");
 
-        if (currentRoom == null) Debug.LogError("CameraManager 中未设置当前房间，请检查 CameraManager 组件设置");
+        currentRoom = GameObject.FindGameObjectWithTag("FirstRoom").GetComponent<RoomTransformer>();
+        if (currentRoom == null) Debug.LogError("CameraManager 中未设置首个房间，请检查场景房间以及房间标签设置");
 
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null) Debug.LogError("场景中不存在 Player，请检查场景中是否有 Player 组件");

@@ -42,7 +42,11 @@ public class GameManager : MonoBehaviour
 
     void InitializeManagers()
     {
-        if (playerPrefab != null) Instantiate(playerPrefab);
+        if (playerPrefab != null)
+        {
+            GameObject go = Instantiate(playerPrefab);
+            if (lastSpawnPoint != Vector2.zero) go.transform.position = lastSpawnPoint;   
+        }
         
         if (UIManager != null) Instantiate(UIManager);
         
