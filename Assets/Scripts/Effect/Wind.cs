@@ -74,6 +74,7 @@ public class Wind : MonoBehaviour
     public float WindInterval { get { return windInterval; } set { } }
     private bool hasApplied;
     private bool isPlayerInside = false;
+    private bool started = false;
 
     [Header("wind 范围内的物体处理")]
     private List<Collider2D> collidersInWind;
@@ -108,7 +109,8 @@ public class Wind : MonoBehaviour
 
     void Start()
     {
-
+        started = true;
+        RefreshItemsInWind();
     }
 
     void Update()
@@ -118,7 +120,7 @@ public class Wind : MonoBehaviour
 
     void OnEnable()
     {
-        RefreshItemsInWind();
+        if (started) RefreshItemsInWind();
         Debug.Log("执行了风的 OnEnable 方法，当前风区 " + gameObject.name + " 内的物体数量：" + collidersInWind.Count + "，其中 Blowable 数量：" + blowablesInWind.Count);
     }
 

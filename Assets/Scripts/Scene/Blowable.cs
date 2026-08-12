@@ -133,6 +133,7 @@ public class Blowable : MonoBehaviour
 
             RemoveDirection(wind);
             windDict.Remove(wind);
+            windContributions.Remove(wind);
         }
 
     }

@@ -38,6 +38,7 @@ public class PlayerMove : MonoBehaviour
     [Header("地面检测")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.55f, 0.1f);
     [SerializeField] private float checkDistance = -1;
     [SerializeField] private float lastGroundedTime = -1;
     [SerializeField] private float coyoteTime = -1;
@@ -103,6 +104,7 @@ public class PlayerMove : MonoBehaviour
         groundCheck = this.gameObject.transform.Find("groundCheck").gameObject.transform;
         if (groundCheck == null) Debug.LogError("玩家预制体缺少 groundCheck，请检查玩家子物体是否挂载了 groundCheck 组件");
         if (groundLayer == 0) Debug.LogError("玩家预制体的 groundLayer 层级有误，请检查 inspector");
+        if (groundCheckSize.x <= 0 || groundCheckSize.y <= 0) Debug.LogError("玩家预制体的 groundCheckSize 有误，请检查 inspector");
         if (checkDistance < 0) Debug.LogError("玩家预制体的 checkDistance 距离有误，请检查 inspector");
         if (coyoteTime <= 0) Debug.LogError("玩家预制体的 coyoteTime 时间有误，请检查 inspector");
 
@@ -142,6 +144,13 @@ public class PlayerMove : MonoBehaviour
         appliedVelocity = velocityAccumulation;
 
         rb.AddForce(impulseAccumulation, ForceMode2D.Impulse);
+    }
+
+    public void ResetState()
+    {
+        runState = RunState.stay;
+        velocityAccumulation = Vector2.zero;
+        impulseAccumulation = Vector2.zero;
     }
 
     public void SetVelocityAccumulation(Vector2 velocity)
@@ -196,19 +205,22 @@ public class PlayerMove : MonoBehaviour
 
     void CheckGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, checkDistance, groundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(
+            groundCheck.position,
+            groundCheckSize,
+            0f,
+            Vector2.down,
+            checkDistance,
+            groundLayer
+        );
 
-        if (hit.collider != null)
+        isGrounded = hit.collider != null;
+        if (isGrounded)
         {
             lastGroundedTime = Time.time;
-            isGrounded = true;
             if (jumpCount == 0) jumpCount = 1;
         }
-        else
-        {
-            isGrounded = false;
-        }
-        
+
         playerAnim.SetIsGrounded(isGrounded);
     }
 
@@ -247,11 +259,11 @@ public class PlayerMove : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        if (groundCheck == null) return;
 
-        Gizmos.DrawLine(
-            groundCheck.position,
-            groundCheck.position + Vector3.down * checkDistance
-        );
+        Gizmos.color = Color.red;
+        Vector3 castCenter = groundCheck.position + Vector3.down * (checkDistance * 0.5f);
+        Vector3 castSize = new Vector3(groundCheckSize.x, groundCheckSize.y + checkDistance, 0f);
+        Gizmos.DrawWireCube(castCenter, castSize);
     }
 }

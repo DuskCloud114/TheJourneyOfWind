@@ -44,8 +44,7 @@ public class CameraManager : MonoBehaviour
         currentRoom = GameObject.FindGameObjectWithTag("FirstRoom").GetComponent<RoomTransformer>();
         if (currentRoom == null) Debug.LogError("CameraManager 中未设置首个房间，请检查场景房间以及房间标签设置");
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null) Debug.LogError("场景中不存在 Player，请检查场景中是否有 Player 组件");
+        player = GameManager.Instance.player;
 
         if (maxMoveBounds.x <= 0f || maxMoveBounds.y <= 0f) Debug.LogError("CameraManager 中的 maxMoveBounds 必须大于 0，请检查 CameraManager 预制体设置或 inspector 设置");
 
@@ -58,7 +57,7 @@ public class CameraManager : MonoBehaviour
         {
             Vector2 playerPosition = player.transform.position;
             Vector2 targetPosition = new Vector2(0f, 0f);
-            
+
             if (playerPosition.x - leftBound >= maxMoveBounds.x && rightBound - playerPosition.x >= maxMoveBounds.x)
             {
                 targetPosition.x = playerPosition.x;
@@ -87,10 +86,19 @@ public class CameraManager : MonoBehaviour
 
             mainCamera.transform.position = new Vector3(
                 Mathf.Lerp(mainCamera.transform.position.x, targetPosition.x, Time.deltaTime * followSpeed),
-                targetPosition.y, 
+                targetPosition.y,
                 mainCamera.transform.position.z
             );
         }
+    }
+
+    public void ResetState()
+    {
+        mainCamera = Camera.main;
+        player = GameManager.Instance.player;
+        currentRoom = GameObject.FindGameObjectWithTag("FirstRoom").GetComponent<RoomTransformer>();
+        if (currentRoom == null) Debug.LogError("CameraManager 中未设置首个房间，请检查场景房间以及房间标签设置");
+        canFollowPlayer = currentRoom.CanFollowPlayer;
     }
 
     public void EnterRoom(RoomTransformer room)
@@ -120,7 +128,7 @@ public class CameraManager : MonoBehaviour
         if (rooms.Count == 0) return;
         currentRoom = rooms[rooms.Count - 1];
         mainCamera.transform.position = new Vector3(currentRoom.RoomCenter.x, currentRoom.RoomCenter.y, mainCamera.transform.position.z);
-        
+
         canFollowPlayer = currentRoom.CanFollowPlayer;
         upBound = currentRoom.GetComponent<BoxCollider2D>().bounds.max.y;
         downBound = currentRoom.GetComponent<BoxCollider2D>().bounds.min.y;
