@@ -40,7 +40,7 @@ public class Wind : MonoBehaviour
 {
     public Action<Wind, bool> WindStateChanged;
 
-    bool isOpen = true;
+    [SerializeField] bool isOpen = true;
     public bool IsOpen { get { return isOpen; } set { } }
 
 
