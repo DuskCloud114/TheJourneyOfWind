@@ -215,7 +215,7 @@ MonoBehaviour:
   fastJumpSpeed: 5
   maxJumpTime: 2
   jumpCount: 1
-  maxVerSpeed: 10
+  maxVerSpeed: 15
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
