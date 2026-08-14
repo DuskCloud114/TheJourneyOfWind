@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 186063884}
   - component: {fileID: 186063887}
   - component: {fileID: 186063888}
+  - component: {fileID: 186063889}
   m_Layer: 0
   m_Name: EndTrigger
   m_TagString: Untagged
@@ -517,6 +518,18 @@ MonoBehaviour:
   fullScreenUI: {fileID: 0}
   dialogueName: End
   targetSceneName: Start
+--- !u!114 &186063889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186063883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4be9c7764d80a74fb46b1296e2a504d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &202941848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4356489674103809169, guid: 40e6c6f28e079124b8c32a189f598681, type: 3}
