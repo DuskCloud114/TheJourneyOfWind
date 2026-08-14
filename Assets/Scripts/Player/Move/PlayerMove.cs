@@ -71,6 +71,8 @@ public class PlayerMove : MonoBehaviour
 
     void OnDisable()
     {
+        AudioManager.Instance?.StopAudio("PlayerRun");
+
         moveInputAction.Normal.Run.performed -= ChangeRunState;
         moveInputAction.Normal.Run.canceled -= ChangeRunState;
 
@@ -164,6 +166,7 @@ public class PlayerMove : MonoBehaviour
 
     void ChangeRunState(InputAction.CallbackContext context)
     {
+        RunState previousState = runState;
         if (context.ReadValue<float>() < 0)
         {
             if (runState != RunState.right)
@@ -186,6 +189,12 @@ public class PlayerMove : MonoBehaviour
         }
 
         playerAnim.SetIsRunning(runState != RunState.stay);
+
+        if (AudioManager.Instance != null && previousState != runState)
+        {
+            if (runState == RunState.stay) AudioManager.Instance.StopAudio("PlayerRun");
+            else AudioManager.Instance.PlayAudio("PlayerRun", true);
+        }
     }
 
     void SpeedUpdate(int direction)
@@ -240,6 +249,7 @@ public class PlayerMove : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + windVelocityY);
                 jumpCount--;
                 playerAnim.SetIsJumping(true);
+                AudioManager.Instance?.PlayAudio("PlayerJump", false);
             }
         }
         if (context.canceled)

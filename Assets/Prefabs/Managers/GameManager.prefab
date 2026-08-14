@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6480503351794402457, guid: 2777ffa293ec0ed44b3d7bcde85c778f, type: 3}
+  player: {fileID: 0}
   UIManager: {fileID: 4646576569944112932, guid: ab535c61273792e419fdc39532242378, type: 3}
-  audioManager: {fileID: 0}
-  sceneManager: {fileID: 0}
+  audioManager: {fileID: 8001915109661169099, guid: fabf129e35da9c84090bb559e81f0315, type: 3}
   skillsManager: {fileID: 1490417433485948854, guid: a37fe01c662358c4d8c635718a31d371, type: 3}
   processManager: {fileID: 7881320518386510828, guid: 05b7d41cd1a8a96498f6a867218614fe, type: 3}
   cameraManager: {fileID: 3024790179129173177, guid: 7a08943c7052e994884651419e9a6538, type: 3}
   windManager: {fileID: 9212663870226124307, guid: 9f57526d5bf9fdd41bbfa2c90220c6e5, type: 3}
+  lastSpawnPoint: {x: 0, y: 0}
+  isSwitchingScene: 0

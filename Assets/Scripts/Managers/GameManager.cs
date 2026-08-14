@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerPrefab == null) Debug.LogError("GameManager上未挂载 playerPrefab，请检查 GameManager 预制体设置");
         if (UIManager == null) Debug.LogError("GameManager上未挂载 UIManager，请检查 GameManager 预制体设置");
-        // if (audioManager == null) Debug.LogError("GameManager上未挂载 audioManager，请检查 GameManager 预制体设置");
+        if (audioManager == null) Debug.LogError("GameManager上未挂载 audioManager，请检查 GameManager 预制体设置");
         if (skillsManager == null) Debug.LogError("GameManager上未挂载 skillsManager，请检查 GameManager 预制体设置");
         if (processManager == null) Debug.LogError("GameManager上未挂载 processManager，请检查 GameManager 预制体设置");
         if (cameraManager == null) Debug.LogError("GameManager上未挂载 cameraManager，请检查 GameManager 预制体设置");

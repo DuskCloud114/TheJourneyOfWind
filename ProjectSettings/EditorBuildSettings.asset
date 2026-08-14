@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 95028c0a06051c0449fc619207ed97b5
+  - enabled: 1
     path: Assets/Scenes/FootOfHill.unity
     guid: 7bdbef57498d5fd46abe679bcf6e8303
   - enabled: 1

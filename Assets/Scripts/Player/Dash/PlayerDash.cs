@@ -95,6 +95,7 @@ public class PlayerDash : MonoBehaviour
             Debug.Log("按下了冲刺");
             if (dashCount > 0)
             {
+                AudioManager.Instance?.PlayAudio("PlayerDash", false);
                 isDashing = true;
                 playerAnim.SetIsDashing(isDashing);
 

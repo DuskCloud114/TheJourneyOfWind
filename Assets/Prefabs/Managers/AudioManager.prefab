@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8001915109661169099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8372105823342179002}
+  - component: {fileID: 2150078208037295041}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8372105823342179002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001915109661169099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2150078208037295041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001915109661169099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcb52971276b354c902a6666ce021fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioName:
+  - StartBGM
+  - PlayerRun
+  - PlayerJump
+  - PlayerDash
+  - PlayerWindBall
+  audioSource:
+  - {fileID: 0}
+  audioClip:
+  - {fileID: 8300000, guid: fad34030ff67b3a4fb8c0e72305d969d, type: 3}
+  - {fileID: 8300000, guid: 97342d7a95dfff648b25841e44ce4fab, type: 3}
+  - {fileID: 8300000, guid: b3a8f1a31816fd3459912c5fa5c91c06, type: 3}
+  - {fileID: 8300000, guid: b64b5cc7740222b499ba925cc08b6d7b, type: 3}
+  - {fileID: 8300000, guid: ed50c3a04be053f41a4e153887fb48e6, type: 3}

@@ -64,6 +64,7 @@ public class Blow : Skill
 
     public override void TryUseSkill(SkillUseType useType)
     {
+        AudioManager.Instance?.PlayAudio("PlayerWindBall", false);
         switch (useType)
         {
             case SkillUseType.weak:
