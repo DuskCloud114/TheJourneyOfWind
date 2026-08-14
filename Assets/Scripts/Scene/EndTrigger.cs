@@ -35,7 +35,10 @@ public class EndTrigger : MonoBehaviour
     IEnumerator Exit()
     {
         yield return new WaitForSeconds(2f);
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
