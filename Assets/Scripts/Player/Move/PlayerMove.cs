@@ -249,7 +249,7 @@ public class PlayerMove : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed + windVelocityY);
                 jumpCount--;
                 playerAnim.SetIsJumping(true);
-                AudioManager.Instance?.PlayAudio("PlayerJump", false);
+                if (isGrounded) AudioManager.Instance?.PlayAudio("PlayerJump", false);
             }
         }
         if (context.canceled)

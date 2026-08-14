@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject windManager;
     public Vector2 lastSpawnPoint;
 
+    private const float BuildWindowScale = 0.57f;
+
     public bool isSwitchingScene = false;
 
     void Awake()
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SetBuildWindowSize();
             InitializeManagers();
         }
         else
@@ -40,6 +43,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
  
+    }
+
+    private void SetBuildWindowSize()
+    {
+#if !UNITY_EDITOR
+        if (BuildWindowScale <= 0f) return;
+
+        int width = Mathf.Max(1, Mathf.RoundToInt(Display.main.systemWidth * BuildWindowScale));
+        int height = Mathf.Max(1, Mathf.RoundToInt(Display.main.systemHeight * BuildWindowScale));
+        Screen.SetResolution(width, height, FullScreenMode.Windowed);
+#endif
     }
 
     void InitializeManagers()

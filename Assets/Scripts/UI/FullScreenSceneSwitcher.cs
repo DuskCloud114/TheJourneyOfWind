@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Listens for completion of a specific FullScreenUI dialogue and then loads a scene.
+// Listens for completion of a specific FullScreenUI dialogue and then changes scene or exits.
 public class FullScreenSceneSwitcher : MonoBehaviour
 {
     [SerializeField] private FullScreenUI fullScreenUI;
     [SerializeField] private string dialogueName = "Start";
     [SerializeField] private string targetSceneName = "FootOfHill";
+    [SerializeField] private bool quitApplicationOnComplete;
 
     private bool isSwitching;
 
@@ -52,6 +53,12 @@ public class FullScreenSceneSwitcher : MonoBehaviour
         if (fullScreenUI == null || !fullScreenUI.IsBackgroundOpaque || !fullScreenUI.IsTextOver)
             return;
 
+        if (quitApplicationOnComplete)
+        {
+            QuitApplication();
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(targetSceneName))
         {
             Debug.LogError($"{name}: target scene name is empty.");
@@ -70,5 +77,14 @@ public class FullScreenSceneSwitcher : MonoBehaviour
 
         if (fullScreenUI != null)
             fullScreenUI.ResetUI();
+    }
+
+    private static void QuitApplication()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

@@ -517,7 +517,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullScreenUI: {fileID: 0}
   dialogueName: End
-  targetSceneName: Start
+  targetSceneName: ""
+  quitApplicationOnComplete: 1
 --- !u!114 &186063889
 MonoBehaviour:
   m_ObjectHideFlags: 0
