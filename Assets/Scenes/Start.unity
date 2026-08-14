@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 706749859}
   - component: {fileID: 706749858}
   - component: {fileID: 706749861}
-  - component: {fileID: 706749862}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -296,21 +295,6 @@ MonoBehaviour:
   dialogueName: Start
   buttonCanvasGroup: {fileID: 0}
   button: {fileID: 706749858}
---- !u!114 &706749862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706749856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47b52504677e7a846bf4e55f29c36988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueName: Start
-  buttonCanvasGroup: {fileID: 0}
-  button: {fileID: 0}
 --- !u!1 &855638257
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,9 +644,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1799576993
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 39f47cb48db7e91428a4eed1b6160800, type: 3}
   m_Color: {r: 0.19900322, g: 0.9811321, b: 0.85089374, a: 1}
   m_FlipX: 0
@@ -682,8 +666,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781207346}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.26, y: 2.36, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.2600098, y: 2.3599854, z: 0}
   m_LocalScale: {x: 0.6611, y: 0.6034, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -846,8 +830,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1799576993
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 53ca09c735e48534094d31b5a870d8ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1066,10 +1050,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1751264110}
-  - {fileID: 2118340275}
-  - {fileID: 1781207348}
   - {fileID: 735574928796394810}
   - {fileID: 2104202187}
+  - {fileID: 2118340275}
+  - {fileID: 1781207348}
   - {fileID: 1742439635}
   - {fileID: 3865887289080392262}
   - {fileID: 2050853207565809398}
