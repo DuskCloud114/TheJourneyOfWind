@@ -13385,6 +13385,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2127522869536951380, guid: 161f97f62feda984da4898530f7dd0a4, type: 3}
+      propertyPath: m_Size.x
+      value: 9.096436
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127522869536951380, guid: 161f97f62feda984da4898530f7dd0a4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5806359396687494672, guid: 161f97f62feda984da4898530f7dd0a4, type: 3}
       propertyPath: m_Name
       value: DeathPoint
