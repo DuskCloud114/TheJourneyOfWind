@@ -28,6 +28,14 @@ public class EndTrigger : MonoBehaviour
         {
             FullScreenUI.Instance.Trigger("End");
             AudioManager.Instance?.PlayAudio("Start", false);
+            StartCoroutine(Exit());
         }
+    }
+
+    IEnumerator Exit()
+    {
+        yield return new WaitForSeconds(2f);
+        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
